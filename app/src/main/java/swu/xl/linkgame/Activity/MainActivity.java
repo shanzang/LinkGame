@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.gyf.immersionbar.ImmersionBar;
 import com.zhangyue.we.x2c.X2C;
 import com.zhangyue.we.x2c.ano.Xml;
 
@@ -29,9 +28,7 @@ import java.util.List;
 import swu.xl.linkgame.Constant.Constant;
 import swu.xl.linkgame.Fragment.HelpFragment;
 import swu.xl.linkgame.Fragment.SettingFragment;
-import swu.xl.linkgame.Fragment.StoreFragment;
 import swu.xl.linkgame.Model.XLLevel;
-import swu.xl.linkgame.Model.XLProp;
 import swu.xl.linkgame.Model.XLUser;
 import swu.xl.linkgame.Music.BackgroundMusicManager;
 import swu.xl.linkgame.Music.SoundPlayUtil;
@@ -50,8 +47,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     Button btn_setting;
     //帮助按钮
     Button btn_help;
-    //商店按钮
-    Button btn_store;
 
     //根布局
     RelativeLayout root_main;
@@ -62,13 +57,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        X2C.setContentView(this, R.layout.activity_main);
+        setContentView(R.layout.activity_main);
+        //X2C.setContentView(this, R.layout.activity_main);
 
         //提前加载资源，不然的话，资源没有加载好，会没有声音
         SoundPlayUtil.getInstance(this);
-
-        //沉浸式状态栏
-        ImmersionBar.with(this).init();
 
         //数据库 LitePal
         LitePal.initialize(this);
@@ -79,11 +72,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         //初始化数据
         initView();
-
-        //设置模式按钮的drawableLeft
-        setDrawableLeft(mode_easy,R.drawable.main_mode_easy);
-        setDrawableLeft(mode_normal,R.drawable.main_mode_normal);
-        setDrawableLeft(mode_hard,R.drawable.main_mode_hard);
 
         //播放音乐
         playMusic();
@@ -130,7 +118,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //查找当前数据库的内容
         List<XLUser> users = LitePal.findAll(XLUser.class);
         List<XLLevel> levels = LitePal.findAll(XLLevel.class);
-        List<XLProp> props = LitePal.findAll(XLProp.class);
 
         //如果用户数据为空，装入数据
         if (users.size() == 0){
@@ -143,7 +130,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //如果关卡数据为空，装入数据
         if (levels.size() == 0){
             //简单模式
-            for(int i = 1; i <= 40; i++){
+            for(int i = 1; i <= 16; i++){
                 XLLevel level = new XLLevel();
                 //设置关卡号
                 level.setL_id(i);
@@ -163,7 +150,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
 
             //普通模式
-            for(int i = 1; i <= 40; i++){
+            for(int i = 1; i <= 16; i++){
                 XLLevel level = new XLLevel();
                 //设置关卡号
                 level.setL_id(i);
@@ -183,7 +170,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
 
             //困难模式
-            for(int i = 1; i <= 40; i++){
+            for(int i = 1; i <= 16; i++){
                 XLLevel level = new XLLevel();
                 //设置关卡号
                 level.setL_id(i);
@@ -202,30 +189,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 level.save();
             }
         }
-
-        //如果道具数据为空，装入数据
-        if (props.size() == 0){
-            //1.装入拳头道具
-            XLProp prop_fight = new XLProp();
-            prop_fight.setP_kind('1');
-            prop_fight.setP_number(9);
-            prop_fight.setP_price(10);
-            prop_fight.save();
-
-            //2.装入炸弹道具
-            XLProp prop_bomb = new XLProp();
-            prop_bomb.setP_kind('2');
-            prop_bomb.setP_number(9);
-            prop_bomb.setP_price(10);
-            prop_bomb.save();
-
-            //3.装入刷新道具
-            XLProp prop_refresh = new XLProp();
-            prop_refresh.setP_kind('3');
-            prop_refresh.setP_number(9);
-            prop_refresh.setP_price(10);
-            prop_refresh.save();
-        }
     }
 
     /**
@@ -242,21 +205,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btn_setting.setOnClickListener(this);
         btn_help = findViewById(R.id.main_help);
         btn_help.setOnClickListener(this);
-        btn_store = findViewById(R.id.main_store);
-        btn_store.setOnClickListener(this);
         root_main = findViewById(R.id.root_main);
-    }
-
-    /**
-     * 用给定资源设置指定按钮的drawableLeft
-     */
-    private void setDrawableLeft(Button btn, int main_mode_resource) {
-        //获取指定的drawable
-        Drawable drawable = getResources().getDrawable(main_mode_resource);
-        //设置其drawable的左上右下
-        drawable.setBounds(PxUtil.dpToPx(20,this),PxUtil.dpToPx(2,this), PxUtil.dpToPx(60,this),PxUtil.dpToPx(42,this));
-        //设置放在控件的左上右下
-        btn.setCompoundDrawables(drawable,null,null,null);
     }
 
     /**
@@ -376,15 +325,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 final HelpFragment help = new HelpFragment();
                 transaction.replace(R.id.root_main,help,"help");
                 transaction.commit();
-
                 break;
-            case R.id.main_store:
-                Log.d(Constant.TAG,"商店按钮");
-
-                //添加一个fragment
-                final StoreFragment store = new StoreFragment();
-                transaction.replace(R.id.root_main,store,"store");
-                transaction.commit();
 
         }
     }

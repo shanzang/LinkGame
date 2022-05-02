@@ -4,7 +4,6 @@
     <!--第一层 阴影-->
     <item>
         <shape>
-            <corners android:bottomRightRadius="30dp"/>
 
             <solid android:color="#991E506E"/>
 
@@ -18,7 +17,6 @@
         >
 
         <shape android:shape="rectangle">
-            <corners android:bottomRightRadius="30dp"/>
 
             <solid android:color="#224A5E"/>
 

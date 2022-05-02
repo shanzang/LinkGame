@@ -17,32 +17,22 @@ public class CustomPaint {
     public Paint mLighnitngGlowPaintBold = new Paint();// 宽阴�?
 
     public CustomPaint() {
-        this.mLighnitngColorPaint.setAntiAlias(true);
+        //抗锯齿
+        this.mLighnitngColorPaint.setAntiAlias(false);
+        //设定是否使用图像抖动处理，会使绘制出来的图片颜色更加平滑和饱满，图像更加清晰
         this.mLighnitngColorPaint.setDither(true);
-        this.mLighnitngColorPaint.setColor(Color.argb(248, 255, 255, 255));
-        this.mLighnitngColorPaint.setStrokeWidth(1.0F);
+        this.mLighnitngColorPaint.setColor(Color.argb(248, 255, 0, 0));
         this.mLighnitngColorPaint.setStyle(Paint.Style.STROKE);
-        this.mLighnitngColorPaint.setStrokeJoin(Paint.Join.ROUND);
-        this.mLighnitngColorPaint.setStrokeCap(Paint.Cap.ROUND);
         this.mLighnitngGlowPaint.set(this.mLighnitngColorPaint);
         this.mLighnitngGlowPaint.setColor(Color.parseColor("#6669FD"));
         this.mLighnitngGlowPaint.setAlpha(235);
-        this.mLighnitngGlowPaint.setStrokeWidth(7.0F);
-        this.mLighnitngGlowPaint.setMaskFilter(new BlurMaskFilter(15.0F,
-                BlurMaskFilter.Blur.NORMAL));
         this.mLighnitngColorPaintBold.setAntiAlias(true);
         this.mLighnitngColorPaintBold.setDither(true);
-        this.mLighnitngColorPaintBold.setColor(Color.argb(248, 255, 255, 255));
-        this.mLighnitngColorPaintBold.setStrokeWidth(3.0F);
+        this.mLighnitngColorPaintBold.setColor(Color.argb(248, 255, 0, 0));
         this.mLighnitngColorPaintBold.setStyle(Paint.Style.STROKE);
-        this.mLighnitngColorPaintBold.setStrokeJoin(Paint.Join.ROUND);
-        this.mLighnitngColorPaintBold.setStrokeCap(Paint.Cap.ROUND);
         this.mLighnitngGlowPaintBold.set(this.mLighnitngColorPaintBold);
-        this.mLighnitngGlowPaintBold.setColor(Color.parseColor("#6669FD"));
+        this.mLighnitngGlowPaintBold.setColor(Color.argb(248, 255, 0, 0));
         this.mLighnitngGlowPaintBold.setAlpha(235);
-        this.mLighnitngGlowPaintBold.setStrokeWidth(10.0F);
-        this.mLighnitngGlowPaintBold.setMaskFilter(new BlurMaskFilter(15.0F,
-                BlurMaskFilter.Blur.NORMAL));
 
     }
 
@@ -51,24 +41,9 @@ public class CustomPaint {
                               int paramInt, Canvas paramCanvas) {
         Random localRandom = new Random();
         if (paramInt < localRandom.nextInt(7)) {
-            paramCanvas.drawLine(x1, y1, x2, y2, mLighnitngColorPaint);
-            paramCanvas.drawLine(x1, y1, x2, y2, mLighnitngColorPaint);
-            paramCanvas.drawLine(x1, y1, x2, y2, mLighnitngGlowPaintBold);
             return;
         }
         float x3 = 0, y3 = 0;
-        if (localRandom.nextBoolean()) {
-            x3 = (float) ((x2 + x1) / 2.0F + ((localRandom.nextInt(8) - 0.5D) * paramInt));
-        } else {
-            x3 = (float) ((x2 + x1) / 2.0F - ((localRandom.nextInt(8) - 0.5D) * paramInt));
-        }
-        if (localRandom.nextBoolean()) {
-            y3 = (float) ((y2 + y1) / 2.0F + ((localRandom.nextInt(5) - 0.5D) * paramInt));
-        } else {
-            y3 = (float) ((y2 + y1) / 2.0F - ((localRandom.nextInt(5) - 0.5D) * paramInt));
-        }
-        drawLightning(x1, y1, x3, y3, paramInt / 2, paramCanvas);
-        drawLightning(x2, y2, x3, y3, paramInt / 2, paramCanvas);
         return;
 
     }

@@ -47,14 +47,9 @@ public class LevelActivity extends BaseActivity implements View.OnClickListener 
 
     //按钮
     ImageButton back;
-    Button pager_up;
-    Button pager_down;
 
     //确定总页数
     int pager;
-
-    //文本
-    TextView pager_text;
 
     //页面控制器
     HorizontalScrollView level_pager;
@@ -66,8 +61,8 @@ public class LevelActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_level);
-        X2C.setContentView(this,R.layout.activity_level);
+        setContentView(R.layout.activity_level);
+        //X2C.setContentView(this,R.layout.activity_level);
 
         //沉浸式状态栏
         ImmersionBar.with(this).init();
@@ -114,20 +109,11 @@ public class LevelActivity extends BaseActivity implements View.OnClickListener 
 
         back = findViewById(R.id.pager_back);
         back.setOnClickListener(this);
-        pager_up = findViewById(R.id.pager_up);
-        pager_up.setOnClickListener(this);
-        pager_down = findViewById(R.id.pager_down);
-        pager_down.setOnClickListener(this);
-
-        pager_text = findViewById(R.id.pager_text);
 
         level_pager = findViewById(R.id.level_pager);
         level_pager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                //禁止HorizontalScrollView滑动
-                //滑动会影响页面控制器
-                //HorizontalScrollView滑动时也没有回调方法
                 return true;
             }
         });
@@ -146,7 +132,6 @@ public class LevelActivity extends BaseActivity implements View.OnClickListener 
                 for (int i = 0; i < levels.size(); i++){
                     //确定页数
                     pager = i / Constant.LEVEL_PAGER_COUNT;
-                    pager_text.setText("1/"+(pager+1));
                     //确定在当前页数的第几行
                     int pager_row = i % Constant.LEVEL_PAGER_COUNT / Constant.LEVEL_ROW_COUNT;
                     //确定在当前页数的第几列
@@ -198,6 +183,7 @@ public class LevelActivity extends BaseActivity implements View.OnClickListener 
                             //判断是否可以进入该关卡
                             if (LevelState.getState(levels.get(v.getId()).getL_new()) != LevelState.LEVEL_STATE_NO){
                                 jumpToLinkActivity(levels.get(v.getId()));
+
                             }else {
                                 Toast.makeText(LevelActivity.this, "当前关卡不可进入", Toast.LENGTH_SHORT).show();
                             }
@@ -212,6 +198,7 @@ public class LevelActivity extends BaseActivity implements View.OnClickListener 
      * 界面跳转
      */
     public void jumpToLinkActivity(XLLevel level){
+
         //跳转界面
         Intent intent = new Intent(this, LinkActivity.class);
         //加入数据
@@ -220,50 +207,10 @@ public class LevelActivity extends BaseActivity implements View.OnClickListener 
         bundle.putParcelable("level",level);
         intent.putExtras(bundle);
         //跳转
+
         startActivity(intent);
     }
 
-
-    /**
-     * 左右滑动一个屏幕关卡视图
-     * @param direction 1:右滑 -1:左滑
-     * @return 返回值表示是否滑动
-     */
-    public boolean scrollLevelsOfDirection(int direction){
-
-        if ((direction == 1 && offset == (pager * screenWidth)) || (direction == -1 && offset == 0)){
-            //如果当前向右滑动 且 当前已经处于最后一页 或
-            //如果当前向左滑动 且 当前已经处于第一页
-            return false;
-        }else if(direction == 1 && offset == ((pager-1) * screenWidth)) {
-            //如果当前向右滑动 且 滑动后处于最后一页
-            //右边的按钮设置不可用
-            pager_down.setEnabled(false);
-            pager_down.setBackgroundResource(R.drawable.level_page_down_enable);
-        }else if(direction == -1 && offset == screenWidth){
-            //如果当前向左滑动 且 滑动后处于第一页
-            //左边的按钮设置不可用
-            pager_up.setEnabled(false);
-            pager_up.setBackgroundResource(R.drawable.level_page_up_enable);
-        }else{
-            //恢复
-            pager_up.setEnabled(true);
-            pager_up.setBackgroundResource(R.drawable.level_page_up);
-            pager_down.setEnabled(true);
-            pager_down.setBackgroundResource(R.drawable.level_page_down);
-        }
-
-        //滑动视图
-        level_pager.smoothScrollTo(offset + screenWidth * direction,0);
-
-        //修改偏移值
-        offset = offset + screenWidth * direction;
-
-        //修改显示内容
-        pager_text.setText((offset / screenWidth+1) + "/" + (pager+1));
-
-        return true;
-    }
 
 
     /**
@@ -281,27 +228,6 @@ public class LevelActivity extends BaseActivity implements View.OnClickListener 
                 Log.d(Constant.TAG,"返回按钮");
 
                 startActivity(new Intent(LevelActivity.this,MainActivity.class));
-
-                //淡入淡出切换动画
-                //overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-
-                //从左向右滑动动画
-                //overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-
-                //自定义动画
-                overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-                break;
-            case R.id.pager_up:
-                Log.d(Constant.TAG,"上一页");
-
-                //左滑
-                scrollLevelsOfDirection(-1);
-                break;
-            case R.id.pager_down:
-                Log.d(Constant.TAG,"下一页");
-
-                //右滑
-                scrollLevelsOfDirection(1);
                 break;
         }
     }

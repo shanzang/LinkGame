@@ -47,8 +47,9 @@
                 <swu.xl.linkgame.SelfView.XLTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Music_Pic"
-                    style="@style/SettingMusicText"
+                    android:text="背景音乐"
+                    android:textColor="#F0B773"
+                    android:textSize="20sp"
                     android:layout_marginBottom="10dp"
                     />
 
@@ -76,7 +77,6 @@
                         android:max="100"
                         android:progress="80"
                         android:secondaryProgress="100"
-                        android:thumb="@drawable/seek_bar_point"
                         android:splitTrack="false"
                         android:background="@null"
                         />
@@ -99,8 +99,9 @@
                 <swu.xl.linkgame.SelfView.XLTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Sound_Pic"
-                    style="@style/SettingMusicText"
+                    android:text="游戏音效"
+                    android:textColor="#F0B773"
+                    android:textSize="20sp"
                     android:layout_marginBottom="10dp"
                     />
 
@@ -128,7 +129,6 @@
                         android:max="100"
                         android:progress="100"
                         android:secondaryProgress="100"
-                        android:thumb="@drawable/seek_bar_point"
                         android:splitTrack="false"
                         android:background="@null"
                         />
@@ -151,7 +151,6 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="@string/FinishText"
-                    android:textStyle="bold"
                     android:textColor="#ffffff"
                     android:textSize="24dp"
                     android:background="@drawable/view_setting_finish"
@@ -171,7 +170,6 @@
         android:layout_above="@+id/setting_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-50dp"
-        android:background="@drawable/view_setting_banner"
         android:gravity="center_horizontal">
 
         <swu.xl.linkgame.SelfView.XLTextView

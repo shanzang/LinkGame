@@ -41,7 +41,6 @@ import swu.xl.linkgame.LinkGame.SelfView.XLRelativeLayout;
 import swu.xl.linkgame.LinkGame.Utils.AnimalSearchUtil;
 import swu.xl.linkgame.LinkGame.Utils.LinkUtil;
 import swu.xl.linkgame.Model.XLLevel;
-import swu.xl.linkgame.Model.XLProp;
 import swu.xl.linkgame.Model.XLUser;
 import swu.xl.linkgame.Music.SoundPlayUtil;
 import swu.xl.linkgame.R;
@@ -64,9 +63,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
     //用户
     XLUser user;
 
-    //道具
-    List<XLProp> props;
-
     //道具信息等布局
     RelativeLayout message_show_layout;
 
@@ -75,7 +71,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
     //时间信息等布局
     CircleProgress time_circle_progress;
-
+    TextView time_s;
     //AnimalView的容器
     XLRelativeLayout link_layout;
 
@@ -87,26 +83,8 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
     //显示关卡的文本
     TextView level_text;
-    //显示金币的文本
-    TextView money_text;
-
-    //拳头道具
-    NumberOfItem prop_fight;
-    //炸弹道具
-    NumberOfItem prop_bomb;
-    //刷新道具
-    NumberOfItem prop_refresh;
     //暂停
     ImageView pause;
-
-    //记录金币的变量
-    int money;
-    //记录拳头道具的数量
-    int fight_num;
-    //记录炸弹道具的数量
-    int bomb_num;
-    //记录刷新道具的数量
-    int refresh_num;
 
     //根布局
     RelativeLayout root_link;
@@ -118,7 +96,9 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_link);
+
         //X2C.setContentView(this,R.layout.activity_link);
 
         //沉浸式状态栏
@@ -150,25 +130,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
         //查询用户数据
         List<XLUser> users = LitePal.findAll(XLUser.class);
         user = users.get(0);
-        money = user.getU_money();
 
-        //查询道具数据
-        props = LitePal.findAll(XLProp.class);
-        for (XLProp prop : props) {
-            if (prop.getP_kind() == PropMode.PROP_FIGHT.getValue()){
-                //拳头道具
-                fight_num = prop.getP_number();
-                Log.d(Constant.TAG,"查询的消除道具数量："+fight_num);
-            }else if (prop.getP_kind() == PropMode.PROP_BOMB.getValue()){
-                //炸弹道具
-                bomb_num = prop.getP_number();
-                Log.d(Constant.TAG,"查询的炸弹道具数量："+bomb_num);
-            }else {
-                //刷新道具
-                refresh_num = prop.getP_number();
-                Log.d(Constant.TAG,"查询的刷新道具数量："+refresh_num);
-            }
-        }
     }
 
     /**
@@ -188,8 +150,12 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
         //CircleProgress相关设置
         time_circle_progress = findViewById(R.id.time_show);
+        time_s = findViewById(R.id.time_s);
         //设置当前进度
+
         time_circle_progress.setProgress(LinkConstant.TIME);
+        time_s.setText(LinkConstant.TIME + "");
+
         //设置位置
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 PxUtil.dpToPx(120, this),
@@ -211,12 +177,16 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
         time_circle_progress.getProgress_paint().setColor(Color.parseColor("#c2c2c2"));
 
         //设置游戏主题内容布局
+
         time_circle_progress.setLayoutParams(layoutParams);
+
         time_circle_progress.post(new Runnable() {
+
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public void run() {
                 message_bottom = time_circle_progress.getBottom();
+
 
                 link_layout = findViewById(R.id.link_layout);
                 ViewGroup.LayoutParams params_link_layout = link_layout.getLayoutParams();
@@ -272,7 +242,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
                                             //当前点改变背景和动画
                                             animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
-                                            animationOnSelectAnimal(animal);
 
                                             //画线
                                             link_layout.setLinkInfo(linkInfo);
@@ -293,8 +262,8 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                                     manager.getBoard()[animal.getPoint().x][animal.getPoint().y] = 0;
 
                                                     //粉碎
-                                                    explosionField.explode(lastAnimal);
-                                                    explosionField.explode(animal);
+                                                    //explosionField.explode(lastAnimal);
+                                                    //explosionField.explode(animal);
 
                                                     //隐藏
                                                     lastAnimal.setVisibility(View.INVISIBLE);
@@ -308,9 +277,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                                                     //去线
                                                     link_layout.setLinkInfo(null);
 
-                                                    //获得金币
-                                                    money += 2;
-                                                    money_text.setText(String.valueOf(money));
 
                                                     //设置所有的宝可梦可以点击
                                                     link_layout.setEnabled(true);
@@ -331,7 +297,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
                                             //设置当前点的背景颜色和动画
                                             animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
-                                            animationOnSelectAnimal(animal);
 
                                             //将当前点作为选中点
                                             manager.setLastAnimal(animal);
@@ -342,7 +307,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
                                         //第一次触摸 当前点改变背景和动画
                                         animal.changeAnimalBackground(LinkConstant.ANIMAL_SELECT_BG);
-                                        animationOnSelectAnimal(animal);
 
                                         //将当前点作为选中点
                                         manager.setLastAnimal(animal);
@@ -366,6 +330,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                         level.getL_mode()
                 );
 
+
                 //设置监听者
                 manager.setListener(LinkActivity.this);
             }
@@ -373,102 +338,14 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
 
         level_text = findViewById(R.id.link_level_text);
         level_text.setText(String.valueOf(level.getL_id()));
-        money_text = findViewById(R.id.link_money_text);
 
-        props_layout = findViewById(R.id.link_props);
-        prop_fight = findViewById(R.id.prop_fight);
-        prop_fight.setOnClickListener(this);
-        prop_bomb = findViewById(R.id.prop_bomb);
-        prop_bomb.setOnClickListener(this);
-        prop_refresh = findViewById(R.id.prop_refresh);
-        prop_refresh.setOnClickListener(this);
         pause = findViewById(R.id.link_pause);
         pause.setOnClickListener(this);
-
-        //手动调整道具的排列
-        final View[] temp_prop = {prop_fight,prop_bomb,prop_refresh,pause};
-        props_layout.post(new Runnable() {
-            @Override
-            public void run() {
-                Log.d(Constant.TAG,"道具容器的宽度:"+PxUtil.pxToDp(props_layout.getWidth(),getBaseContext()));
-
-                //控制道具的大小
-                int prop_size = PxUtil.dpToPx(55,getBaseContext());
-
-                //计算间距
-                int padding = (props_layout.getWidth() - prop_size * 4) / 5;
-
-                //依次设置位置
-                for (int i = 0; i < temp_prop.length; i++) {
-                    //设置约束
-                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                            prop_size,
-                            prop_size
-                    );
-                    layoutParams.setMargins(
-                            padding+(padding+prop_size)*i,
-                            0,
-                            padding+(padding+prop_size)*i+prop_size,
-                            0);
-                    //重新设置给道具视图
-                    temp_prop[i].setLayoutParams(layoutParams);
-                }
-            }
-        });
-
-        //设置金币
-        money_text.setText(String.valueOf(money));
-
-        //设置道具数量
-        prop_fight.setCount(fight_num);
-        prop_bomb.setCount(bomb_num);
-        prop_refresh.setCount(refresh_num);
 
         root_link = findViewById(R.id.root_link);
     }
 
-    /**
-     * 选中的AnimalView动画
-     * @param animal
-     */
-    private void animationOnSelectAnimal(AnimalView animal){
-        //缩放动画
-        ScaleAnimation scaleAnimation = new ScaleAnimation(
-                1.0f, 1.05f,
-                1.0f, 1.05f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f
-        );
-        scaleAnimation.setDuration(100);
-        scaleAnimation.setRepeatCount(0);
-        scaleAnimation.setFillAfter(true);
 
-        //旋转动画
-        RotateAnimation rotateAnimation = new RotateAnimation(
-                -20f,
-                20f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f
-        );
-        rotateAnimation.setDuration(500);
-        rotateAnimation.setStartOffset(100);
-        rotateAnimation.setRepeatCount(Animation.INFINITE);
-        rotateAnimation.setRepeatMode(Animation.REVERSE);
-        rotateAnimation.setInterpolator(new BounceInterpolator());
-
-        //组合动画
-        AnimationSet animationSet = new AnimationSet(true);
-        animationSet.addAnimation(scaleAnimation);
-        animationSet.addAnimation(rotateAnimation);
-
-        //开启动画
-        animal.startAnimation(animationSet);
-        animationSet.startNow();
-    }
 
     //点击事件
     @Override
@@ -477,75 +354,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
         SoundPlayUtil.getInstance(getBaseContext()).play(3);
 
         switch (v.getId()){
-            case R.id.prop_fight:
-                Log.d(Constant.TAG,"拳头道具");
 
-                if (fight_num > 0){
-                    //随机消除一对可以消除的AnimalView
-                    manager.fightGame(LinkActivity.this);
-
-                    //数量减1
-                    fight_num--;
-                    prop_fight.setCount(fight_num);
-
-                    //数据库处理
-                    ContentValues values = new ContentValues();
-                    values.put("p_number",fight_num);
-                    LitePal.update(XLProp.class,values,1);
-                }else {
-                    Toast.makeText(this, "道具已经用完", Toast.LENGTH_SHORT).show();
-                }
-
-                break;
-            case R.id.prop_bomb:
-                Log.d(Constant.TAG,"炸弹道具");
-
-                if (bomb_num > 0){
-                    //随机消除某一种所有的AnimalView
-                    manager.bombGame(LinkActivity.this);
-
-                    //数量减1
-                    bomb_num--;
-                    prop_bomb.setCount(bomb_num);
-                    Log.d(Constant.TAG,"数量："+bomb_num);
-
-                    //数据库处理
-                    ContentValues values = new ContentValues();
-                    values.put("p_number",bomb_num);
-                    LitePal.update(XLProp.class,values,2);
-                }else {
-                    Toast.makeText(this, "道具已经用完", Toast.LENGTH_SHORT).show();
-                }
-
-                break;
-            case R.id.prop_refresh:
-                Log.d(Constant.TAG,"刷新道具");
-
-                if (refresh_num > 0){
-                    //刷新游戏
-                    manager.refreshGame(
-                            getApplicationContext(),
-                            link_layout,
-                            screenWidth,
-                            screenHeight-message_bottom-ScreenUtil.getNavigationBarHeight(getApplicationContext()),
-                            level.getL_id(),
-                            level.getL_mode(),
-                            LinkActivity.this
-                    );
-
-                    //数量减1
-                    refresh_num--;
-                    prop_refresh.setCount(refresh_num);
-
-                    //数据库处理
-                    ContentValues values = new ContentValues();
-                    values.put("p_number",refresh_num);
-                    LitePal.update(XLProp.class,values,3);
-                }else {
-                    Toast.makeText(this, "道具已经用完", Toast.LENGTH_SHORT).show();
-                }
-
-                break;
             case R.id.link_pause:
                 Log.d(Constant.TAG,"暂停");
 
@@ -570,13 +379,18 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
     @SuppressLint("SetTextI18n")
     @Override
     public void onTimeChanged(float time) {
+
         //如果时间小于0
         if (time <= 0.0){
             manager.pauseGame();
             manager.endGame(this,level,time);
         }else {
             //保留小数后一位
+            //time_circle_progress.setProgress(time);
+
             time_circle_progress.setProgress(time);
+            time_s.setText((int)time +"");
+
         }
 
         //如果board全部清除了
@@ -597,8 +411,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                 next_level.update(level.getId()+1);
             }
 
-            //金币道具清算
-            user.setU_money(money);
             user.update(1);
         }
     }

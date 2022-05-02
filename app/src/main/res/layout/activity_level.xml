@@ -49,42 +49,13 @@
             android:id="@+id/pager_back"
             android:layout_marginTop="40dp"
             android:layout_marginStart="20dp"
-            style="@style/operation_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitXY"
+            android:padding="10dp"
             android:background="@drawable/btn_shape_next"
             android:src="@drawable/level_back"
             />
-
-        <!--页面控制器-->
-        <LinearLayout
-            android:layout_marginTop="45dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            >
-
-            <Button
-                android:id="@+id/pager_up"
-                style="@style/pager_bg"
-                android:background="@drawable/level_page_up_enable"
-                android:enabled="false"
-                />
-
-            <swu.xl.linkgame.SelfView.XLTextView
-                android:id="@+id/pager_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1/2"
-                android:layout_gravity="center_vertical"
-                style="@style/ShowPagerMessage"
-                />
-
-            <Button
-                android:id="@+id/pager_down"
-                style="@style/pager_bg"
-                android:background="@drawable/level_page_down"
-                />
-
-        </LinearLayout>
 
     </RelativeLayout>
 

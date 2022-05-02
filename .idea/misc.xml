@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/btn_shape_main_bg.xml" value="0.18125" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/btn_shape_main_know.xml" value="0.1671875" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/btn_shape_menu.xml" value="0.1671875" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/btn_shape_next.xml" value="0.1671875" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/btn_shape_refresh.xml" value="0.1671875" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1671875" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/img_shape.xml" value="0.1671875" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/link_message.xml" value="0.1671875" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/link_prop.xml" value="0.1671875" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/link_prop_num.xml" value="0.1671875" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/link_time.xml" value="0.18125" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/link_time_bg.xml" value="0.18125" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/progressbar_bg.xml" value="0.1" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/store_prop_bg_shape.xml" value="0.10648148148148148" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/view_setting_finish.xml" value="0.1111111111111111" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/view_setting_pic_bg.xml" value="0.1111111111111111" />
+        <entry key="..\:/LinkGame/app/src/main/res/drawable/view_store_bg.xml" value="0.18125" />
+        <entry key="..\:/LinkGame/app/src/main/res/layout/activity_failure.xml" value="0.1" />
+        <entry key="..\:/LinkGame/app/src/main/res/layout/activity_level.xml" value="0.1" />
+        <entry key="..\:/LinkGame/app/src/main/res/layout/activity_link.xml" value="0.1" />
+        <entry key="..\:/LinkGame/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/LinkGame/app/src/main/res/layout/activity_success.xml" value="0.16510416666666666" />
+        <entry key="..\:/LinkGame/app/src/main/res/layout/help_view.xml" value="0.1" />
+        <entry key="..\:/LinkGame/app/src/main/res/layout/pause_view.xml" value="0.1" />
+        <entry key="..\:/LinkGame/app/src/main/res/layout/setting_view.xml" value="0.1" />
+        <entry key="..\:/LinkGame/app/src/main/res/layout/store_view.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop/JavaDoc" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

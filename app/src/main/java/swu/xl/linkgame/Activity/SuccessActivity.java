@@ -100,8 +100,6 @@ public class SuccessActivity extends BaseActivity implements View.OnClickListene
         //设置分数
         score_text.setText(LinkUtil.getScoreByTime(level.getL_time())+"分");
 
-        //设置连击
-        batter_text.setText(serial_click+"次");
     }
 
     /**
@@ -122,7 +120,6 @@ public class SuccessActivity extends BaseActivity implements View.OnClickListene
         level_text = findViewById(R.id.level_text);
         score_text = findViewById(R.id.score_text);
         time_text = findViewById(R.id.time_text);
-        batter_text = findViewById(R.id.batter_text);
 
         menu_btn = findViewById(R.id.btn_menu);
         menu_btn.setOnClickListener(this);

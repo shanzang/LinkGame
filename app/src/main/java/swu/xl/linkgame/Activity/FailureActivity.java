@@ -37,8 +37,6 @@ public class FailureActivity extends BaseActivity {
         //setContentView(R.layout.activity_failure);
         X2C.setContentView(this, R.layout.activity_failure);
 
-        //沉浸式状态栏
-        ImmersionBar.with(this).init();
 
         //获取数据
         Intent intent = this.getIntent();

@@ -17,14 +17,6 @@
         >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/success_animals"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="80dp"
-            />
-
-        <ImageView
             android:id="@+id/iv_banner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -145,29 +137,6 @@
                 />
         </LinearLayout>
 
-        <!--连机信息-->
-        <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            >
-            <swu.xl.linkgame.SelfView.XLTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Batter"
-                style="@style/StateTitleMessage"
-                />
-
-            <swu.xl.linkgame.SelfView.XLTextView
-                android:id="@+id/batter_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20次"
-                style="@style/StateContentMessage"
-                />
-        </LinearLayout>
-
     </LinearLayout>
 
     <!--按钮操作部分-->
@@ -183,7 +152,10 @@
         <!--回到关卡选择界面-->
         <ImageButton
             android:id="@+id/btn_menu"
-            style="@style/operation_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitXY"
+            android:padding="10dp"
             android:background="@drawable/btn_shape_menu"
             android:src="@drawable/menu"
 
@@ -193,7 +165,10 @@
         <!--重新开启本局-->
         <ImageButton
             android:id="@+id/btn_refresh"
-            style="@style/operation_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitXY"
+            android:padding="10dp"
             android:background="@drawable/btn_shape_refresh"
             android:src="@drawable/refresh"
             />
@@ -201,7 +176,10 @@
         <!--开启下一关-->
         <ImageButton
             android:id="@+id/btn_next"
-            style="@style/operation_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitXY"
+            android:padding="10dp"
             android:background="@drawable/btn_shape_next"
             android:src="@drawable/next"
 
