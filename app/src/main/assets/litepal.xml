@@ -15,7 +15,6 @@
     -->
     <list>
         <mapping class="swu.xl.linkgame.Model.XLUser"  />
-        <mapping class="swu.xl.linkgame.Model.XLProp"  />
         <mapping class="swu.xl.linkgame.Model.XLLevel" />
     </list>
 

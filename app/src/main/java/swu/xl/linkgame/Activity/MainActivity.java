@@ -57,8 +57,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //X2C.setContentView(this, R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+        X2C.setContentView(this, R.layout.activity_main);
 
         //提前加载资源，不然的话，资源没有加载好，会没有声音
         SoundPlayUtil.getInstance(this);
