@@ -70,19 +70,6 @@
                 android:src="@drawable/refresh"
                 />
 
-            <!--开启下一关-->
-            <ImageButton
-                android:id="@+id/btn_next"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:scaleType="fitXY"
-                android:padding="10dp"
-                android:background="@drawable/btn_shape_next"
-                android:src="@drawable/next"
-
-                android:layout_marginStart="50dp"
-                />
-
         </LinearLayout>
 
     </LinearLayout>

@@ -165,11 +165,7 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                 PxUtil.dpToPx(-50, this),
                 ScreenUtil.getStateBarHeight(this) - PxUtil.dpToPx(20,this),
                 0,0);
-        //设置角度
-        int angle1 = (int) Math.toDegrees(Math.atan(Math.sqrt(44) / 10));
-        int angle2 = (int) Math.toDegrees(Math.atan(Math.sqrt(95) / 10));
-        time_circle_progress.setStartAngle(270+angle1);
-        time_circle_progress.setEndAngle(540-angle2);
+
 
         //设置进度颜色以及当前进度值以及总的进度值
         time_circle_progress.setProgress(90);
@@ -335,9 +331,6 @@ public class LinkActivity extends BaseActivity implements View.OnClickListener,L
                 manager.setListener(LinkActivity.this);
             }
         });
-
-        level_text = findViewById(R.id.link_level_text);
-        level_text.setText(String.valueOf(level.getL_id()));
 
         pause = findViewById(R.id.link_pause);
         pause.setOnClickListener(this);

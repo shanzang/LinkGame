@@ -30,14 +30,8 @@ import swu.xl.linkgame.SelfView.XLTextView;
 import swu.xl.linkgame.Util.StateUtil;
 
 public class SuccessActivity extends BaseActivity implements View.OnClickListener {
-    //星星
-    ImageView left_star;
-    ImageView middle_star;
-    ImageView right_star;
     private List<ImageView> stars;
 
-    //关卡文本
-    XLTextView level_text;
     //分数文本
     XLTextView score_text;
     //时间文本
@@ -61,7 +55,7 @@ public class SuccessActivity extends BaseActivity implements View.OnClickListene
         X2C.setContentView(this,R.layout.activity_success);
 
         //沉浸式状态栏
-        ImmersionBar.with(this).init();
+        //ImmersionBar.with(this).init();
 
         //找到相关控件
         initView();
@@ -84,15 +78,6 @@ public class SuccessActivity extends BaseActivity implements View.OnClickListene
         level = bundle.getParcelable("level");
         int serial_click = bundle.getInt("serial_click");
 
-        //设置关卡数据
-        level_text.setText("第"+level.getL_id()+"关");
-
-        //设置星星
-        int star_size = level.getL_new() - '0';
-        Log.d(Constant.TAG,"星星个数："+level.getL_new()+" "+star_size);
-        for (int i = 1; i <= star_size; i++) {
-            stars.get(i-1).setVisibility(View.VISIBLE);
-        }
 
         //设置时间
         time_text.setText(level.getL_time()+"秒");
@@ -106,18 +91,6 @@ public class SuccessActivity extends BaseActivity implements View.OnClickListene
      * 找到相关的控件
      */
     private void initView() {
-        stars = new ArrayList<>();
-        left_star = findViewById(R.id.star_left);
-        left_star.setVisibility(View.INVISIBLE);
-        middle_star = findViewById(R.id.star_middle);
-        middle_star.setVisibility(View.INVISIBLE);
-        right_star = findViewById(R.id.star_right);
-        right_star.setVisibility(View.INVISIBLE);
-        stars.add(left_star);
-        stars.add(middle_star);
-        stars.add(right_star);
-
-        level_text = findViewById(R.id.level_text);
         score_text = findViewById(R.id.score_text);
         time_text = findViewById(R.id.time_text);
 
@@ -125,8 +98,8 @@ public class SuccessActivity extends BaseActivity implements View.OnClickListene
         menu_btn.setOnClickListener(this);
         refresh_btn = findViewById(R.id.btn_refresh);
         refresh_btn.setOnClickListener(this);
-        next_btn = findViewById(R.id.btn_next);
-        next_btn.setOnClickListener(this);
+        //next_btn = findViewById(R.id.btn_next);
+        //next_btn.setOnClickListener(this);
     }
 
     //按钮的监听回调
@@ -148,13 +121,6 @@ public class SuccessActivity extends BaseActivity implements View.OnClickListene
                 Log.d(Constant.TAG,"重新加载按钮");
 
                 jumpToActivity(1);
-
-                break;
-            case R.id.btn_next:
-                //下一关按钮
-                Log.d(Constant.TAG,"下一个关卡按钮");
-
-                jumpToActivity(2);
 
                 break;
         }

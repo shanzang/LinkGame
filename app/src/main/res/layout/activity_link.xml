@@ -35,27 +35,12 @@
                 android:orientation="horizontal"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="1dp"
-                    android:text="关卡"
-                    style="@style/link_level"
-                    />
 
-                <TextView
-                    android:id="@+id/link_level_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15"
-                    android:paddingStart="8dp"
-                    style="@style/link_level"
-                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="剩余时间"
-                    android:paddingStart="25dp"
+                    android:paddingStart="10dp"
                     style="@style/link_level"></TextView>
                 <TextView
                     android:layout_width="wrap_content"
@@ -68,7 +53,7 @@
                     android:id="@+id/link_pause"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:layout_marginStart="55dp"
+                    android:layout_marginStart="140dp"
                     android:src="@drawable/link_stop"
                     />
             </LinearLayout>

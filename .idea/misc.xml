@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidPro/app/src/main/res/layout/activity_link.xml" value="0.1" />
+        <entry key="..\:/AndroidPro/app/src/main/res/layout/activity_success.xml" value="0.1" />
+        <entry key="..\:/AndroidPro/app/src/main/res/layout/pause_view.xml" value="0.1" />
         <entry key="..\:/LinkGame/app/src/main/res/drawable/btn_shape_main_bg.xml" value="0.18125" />
         <entry key="..\:/LinkGame/app/src/main/res/drawable/btn_shape_main_know.xml" value="0.1671875" />
         <entry key="..\:/LinkGame/app/src/main/res/drawable/btn_shape_menu.xml" value="0.1671875" />

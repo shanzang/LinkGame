@@ -97,32 +97,6 @@ public class PauseFragment extends Fragment {
                 }
             }
         });
-        inflate.findViewById(R.id.btn_next).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //播放点击音效
-                SoundPlayUtil.getInstance(getContext()).play(3);
-
-                //下一关
-
-                //加入关卡数据
-                XLLevel next_level = LitePal.find(XLLevel.class, level.getId() + 1);
-
-                //判断是否开启
-                if (next_level.getL_new() != LevelState.LEVEL_STATE_NO.getValue()){
-                    //跳转界面
-                    Intent intent = new Intent(getActivity(), LinkActivity.class);
-                    //加入数据
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("level",next_level);
-                    intent.putExtras(bundle);
-                    //跳转
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(getActivity(), "下一关还没有开启", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         return inflate;
     }
